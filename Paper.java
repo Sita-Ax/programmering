@@ -192,7 +192,7 @@ public class Paper {
 				System.out.println(player2);
 				System.out.println("It is equal! ");
 				System.out.println();
-				} /*else {*/
+				} 
 				while (p1Points == 3) {
 					System.out.println("Player1 You win congrats! ");
 					System.out.println();
