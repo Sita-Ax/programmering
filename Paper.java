@@ -132,12 +132,6 @@ public class Paper {
 //						}
 				System.out.println("Not number over 4");
 			} 		
-			if (player1 == player2) {
-				System.out.println(player1);
-				System.out.println(player2);
-				System.out.println("It is equal! ");
-				System.out.println();
-			} else {
 
 				if (player1 == 1 && player2 == 3) {
 					System.out.println("Player1 selected rock ");
@@ -157,7 +151,7 @@ public class Paper {
 					System.out.println("Player2 you have: " + p2Points + " on round " + rounds);
 					System.out.println();
 				}
-				if (player1 == 2 && player2 == 1) {
+				else if (player1 == 2 && player2 == 1) {
 					System.out.println("Player1 selected paper ");
 					System.out.println("Player2 selected rock ");
 					System.out.println("Player1 won.  ");
@@ -175,45 +169,50 @@ public class Paper {
 					System.out.println("Player2 you have: " + p2Points + " on round " + rounds);
 					System.out.println();
 				}
-				if (player1 == 3 && player2 == 1) {
-					System.out.println("Player1 selected scissors ");
-					System.out.println("Player2 selected rock ");
+				else if (player1 == 2 && player2 == 3) {
+					System.out.println("Player1 selected paper ");
+					System.out.println("Player2 selected scissors");
 					System.out.println("Player2 won. ");
 					p2Points++;
 					rounds++;
 					System.out.println("Player2 you have: " + p2Points + " on round " + rounds);
 					System.out.println();
 
-				} else if (player2 == 3 && player1 == 1) {
-					System.out.println("Player1 selected rock ");
-					System.out.println("Player2 selected scissors ");
+				} else if (player2 == 2 && player1 == 3) {
+					System.out.println("Player1 selected scissors ");
+					System.out.println("Player2 selected paper ");
 					System.out.println("Player1 won. ");
 					p1Points++;
 					rounds++;
 					System.out.println("Player1 you have: " + p1Points + " on round " + rounds);
 					System.out.println();
-				}
-				if (p1Points == 3) {
+					
+				}else if (player1 == player2) {
+				System.out.println(player1);
+				System.out.println(player2);
+				System.out.println("It is equal! ");
+				System.out.println();
+				} /*else {*/
+				while (p1Points == 3) {
 					System.out.println("Player1 You win congrats! ");
 					System.out.println();
 					reset();
-					rounds++;
 					menu();
 				}
-				if (p2Points == 3) {
+				 if (p2Points == 3) {
 					System.out.println("Player2 You win congrats! ");
 					System.out.println();
 					reset();
-					rounds++;
 					menu();
 				}
 			}
 		}
-	}
+	
 
 	public static void reset() { // skapade denna metod för att nollställa poängen mellan spelet och nästa spel
 		p1Points = 0;
 		p2Points = 0;
+		rounds = 0;
 	}
 
 	public static void main(String[] args) {
