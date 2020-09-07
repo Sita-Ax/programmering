@@ -1,23 +1,22 @@
 package hangman;
 
-import java.util.ArrayList;
-import java.util.Random;
 import java.util.Scanner;
 
 public class Hangman1 {
 
-		private static String[] words = { "family", "best friends", "computer", "fruit", "teacher", "bag" };
-		public static Random rand = new Random();		//it´used to random a word
 		public static int maxCount = 7;		//it´s mean that you have 7 guesses.
 		public static int wrongGuess = 0;		
-		public static String guess = "*";
 		public static String wordToFind;		//this is the secret word to find
 		static char [] wordFound;			//the letters founded
 		public static String tryLetter = "You guessed on: ";		///your guesses
-		public static ArrayList<String> letters = new ArrayList<String>();
 		
 		public static void main (String[] args) {
 			
+//			Scanner input = new Scanner(System.in);
+			wordToFind = Hang.getWord();
+
+//			System.out.println(wordToFind);
+						
 			welcomeWords();		
 			menu();
 		}
@@ -34,19 +33,16 @@ public class Hangman1 {
 		switch(str) {
 		
 			case "GL":
-		
+				setupGame(wordToFind);
 				play();
-				newGame();
-				setupGame(letters);
-				enter(guess);
-				checkingChar(str);
+
 			break;
 			
 			case "GW":
-				play();
-				wordFoundContent();
-				nextWord();
-				wordFound();
+				setupGame(wordToFind);
+//				play();
+//				nextWord();
+//				wordFound();
 			break;
 			
 			case "GS":
@@ -67,113 +63,91 @@ public class Hangman1 {
 	    System.out.println(" ");
 	 }
 	
-		public static String nextWord() {		//random words to find
-			
-			return words[rand.nextInt(words.length)];
+		public static void nextWord() {		//random words to find
+
+			wordToFind = Hang.getWord();
+			setupGame(wordToFind);
+			System.out.println("");
 		}	
 		
-		public static void newGame() {			//start a new game
-			wrongGuess = 0;
-			letters.clear();
-			wordToFind = nextWord();
-			wordFound = new char[wordToFind.length()];		//in letters
-			for (int i = 0; i < wordFound.length; i++) {
-				wordFound[i] = '*';	
+		static void setupGame(String letters) {
+			
+		wordFound =  wordToFind.toCharArray();		//the secret word convert to a char array so the word becomes letters instead of at string	
+		for(int i = 0; i < (wordFound.length); i++) {
+			wordFound[i] = '*';
 			}
-			System.out.println(wordToFind);
-		}
-		
-		static void setupGame(ArrayList<String> letters) {
-			
-			char[] wordFound = words[rand.nextInt(words.length)].toCharArray();
-	//		Object [] letters1 =  letters.toArray();
-			
-			for(int i = 0; i < ((CharSequence) letters).length(); i++) {
-				wordFound[i] = '*';
-				
-				}
-			System.out.println(letters);
-		}
+	}	
 
 			public static void play() {
 			
 			try(Scanner input = new Scanner(System.in)){		//play as long as the wrong guesses is lower than 7
 				while (wrongGuess < maxCount) {
-					System.out.println("The secretword: " + wordToFind);
+					System.out.print("The secretword: " );
+					System.out.println(wordFound);
 					System.out.println("Enter a letter: ");
 					String str = input.next();				//users input
-					
-					if(str.length() > 1) {			//keep the first letter
+						enter(str);								//this found the letter 
+					if(str.length() > 1) {					//keep the first letter
 						str = str.substring(0, 1);
-					}
-	
-					enter(str);			//this is found
-					
-					System.out.println("\n " + wordFoundContent());		//förra bokstav
-					
-					int guessWrong = (maxCount - wrongGuess);
-					if(wrongGuess >=maxCount) {
+					}					
+					System.out.println("\n " + wordFoundContent());		//last letter
+					if(wrongGuess >= maxCount) {				//if the letter is wrong
 						hangmanImage();
 					}
-					
-					if(wordFound()) {				//om ordet hittas
+					if(wordFound()) {				//if the word is right
 						winnerWords();
 						break;
 					}
 				}
-
-				if(wrongGuess == maxCount) {			//om man förlorar
-					
-				}
-		}
+			}
 		}
 			static void gameStatus(){
 				
-				System.out.println("You have " + (maxCount - wrongGuess)+ " guesses remaining and: " + " letters left" );//hur många gissningar man har kvar
-				System.out.println(tryLetter);
+				System.out.println("You have " + (maxCount - wrongGuess)+ " guesses remaining and: " + " letters left" );//how many guesses you have left 
+				System.out.println(tryLetter + " letters ");//how many letters you have found
 				menu();
 			}
-			
-			private static boolean checkingChar(String letter) {
-		 if (letter.length() != 1 || Character.isDigit(letter.charAt(0))) {
-		    System.out.println("** ERROR: Just a letter no number! **");
-			System.out.println(" ");
-		    return false;
-		    }
-		    return true;
-		    }
-			
-		public static void enter(String guess) {	//metod som gör uppdatering efter en hittade bokstav
-			if (!letters.contains(guess)){			// has the letter been used
-				if(wordToFind.contains(guess)) {		//does the word have this letter
-					int index = wordToFind.indexOf(guess); 	//if the letter is in the word change to*
-					
+//			
+//			private static boolean checkingChar(String letters) {
+//		 if (letters.length() != 1 || Character.isDigit(letters.charAt(0))) {
+//		    System.out.println("** ERROR: Just a letter no number! **");
+//			System.out.println(" ");
+//		    return false;
+//		    }
+//		    return true;
+//		    }
+//			
+		public static void enter(String tryletter) {	//metod som gör uppdatering efter en hittade bokstav
+//			if (!letters.contains(tryletter)){			// has the letter been used
+				if(wordToFind.contains(tryletter)) {		//does the word have this letter
+					int index = wordToFind.indexOf(tryletter); 	//the index is putting the letter on the right spot if it's right
 					while (index >= 0) {
-						wordFound[index] = guess.charAt(0);
-						index = wordToFind.indexOf(guess, index + 1);
+						wordFound[index] = tryletter.charAt(index);
+						index = wordToFind.indexOf(tryletter, index + 1);
 					}
 				}else {
-					hangmanImage();
 					wrongGuess++;	//if the letter don't exist use the hangman
+					hangmanImage();
 				}
-			letters.add(guess);	//keep the letter in the place
-		}
+//			letters.add(tryletter);	//keep the letter in the place
+//		}
 		}
 		static String wordFoundContent() {		//the content in the word
 			
 			StringBuilder builder = new StringBuilder();
-			
+
+			System.out.println("this is the content of the word: " + wordToFind);
 			for(int i = 0; i < wordFound.length; i++) {
 				builder.append(wordFound[i]);
 		
-				if(i < wordFound.length - 1) {
+				if(i < wordFound.length - 1) {			//do space between the letters
 					builder.append(" ");
 				}
 		}
 			return builder.toString();
 		}
-		public static boolean wordFound() {		//the 
-//Under Hangman-spelet måste vi hantera det ord som hittats av användaren i vår HangmanGame-klass. Först måste vi ha en metod för att avgöra om ordet att hitta har hittats. För det behöver vi bara omvandla wordFound-matrisen till String och sedan jämföra denna nya String med wordFind:
+		public static boolean wordFound() {		//when the word is right
+// Först måste vi ha en metod för att avgöra om ordet att hitta har hittats. För det behöver vi bara omvandla wordFound-matrisen till String och sedan jämföra denna nya String med wordFind:
 			return wordToFind.contentEquals(new String(wordFound));
 		}
 		
@@ -270,14 +244,5 @@ public class Hangman1 {
 				System.out.println("GAME OVER! The word was " + wordToFind);
 			}
 		}	
-
-		public String[] getWord() {
-			return words;
-		}
-
-		public void setWord(String []word) {
-
-			this.words = word;
-		}
 
 }
