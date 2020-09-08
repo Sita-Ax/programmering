@@ -37,7 +37,7 @@ public class Hangman1 {
 			menu();
 			break;
 
-		case "GW":
+		case "GW":					//it's not ready
 			setupGame(wordToFind);
 			playWord(wordToFind);
 			menu();
