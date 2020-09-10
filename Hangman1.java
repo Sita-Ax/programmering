@@ -8,7 +8,8 @@ public class Hangman1 {
 	public static int count = 0;
 	public static int wrongGuess = 0;
 	// this is the secret word to find
-	public static String wordToFind; 										
+	public static String wordToFind; 
+	public static String words ="**************";
 	// the letters founded
 	static char[] wordFound; 												
 	// your guesses
@@ -38,8 +39,9 @@ public class Hangman1 {
 			break;
 
 		case "GW":					//it's not ready
+			while (wordToFind.contains("*")&&count < 7) {}
 			setupGame(wordToFind);
-			playWord(wordToFind);
+			playWord(str);
 			menu();
 			break;
 
@@ -142,7 +144,6 @@ public class Hangman1 {
 				wordFound[index] = tryletter.charAt(0); 
 				// it will be next letter that is right
 				index = wordToFind.indexOf(tryletter, index + 1);
-				
 			}
 		} else {
 			// if the letter don't exist use the hangman
@@ -151,39 +152,38 @@ public class Hangman1 {
 		}
 	}
 
-	public static void playWord(String word) {
+	public static void playWord(String guess) {
 		
-			Scanner input = new Scanner (System.in);
-
-				while (wrongGuess < maxCount) {
-					System.out.print("The secretword: ");
-					System.out.println(wordFound);
-					System.out.println("Enter a Word: ");
-					//user input
-					String wordInput = input.nextLine();
-					//find letter
-					char[] ch =wordToFind.toCharArray();
-					if(wordToFind.contains(word)) {
-						int index = wordToFind.indexOf(word);
-					while (index <= 20) {
-						// keep the first letter
-						if (wordFound.length > 0) { 
-							wordInput = wordInput.substring(0, 20);
-						}						 
-						System.out.println("index enter() " + index);
-						System.out.println("index enter() " + wordInput);
-						System.out.println("\n " + wordFoundContent());
-					for(int i = 0; i < wordToFind.length(); i++) {
-						index = wordToFind.indexOf(wordToFind, index + 1);
-						if(wrongGuess >= maxCount) {
-							hangmanImage();
-						}
-						if (wordFound()) {
-							winnerWords();
-						}
-					}
-				}
+		Scanner input = new Scanner (System.in);
+//		while(wordToFind.contains("*")&&count<7) {
+			System.out.print("The secretword: ");
+			System.out.println(wordFound);
+			System.out.println("Enter a Word: ");
+			String user = input.next();
+			//string used length so don't need to count
+			for(int i = 0; i < wordToFind.length(); i++) {		
+				System.out.println(words);
+			//is guess the first letter är position 0 i min guess om guess är längre än 0
+				if(user.charAt(i) == wordToFind.charAt(0)) {
+					//when charAt is equals to guesses save
+					user += wordToFind.charAt(i);					
+					System.out.println("jjjjj");
+					//were is the letter in my string
+				}else if (wordToFind.charAt(i) != '*') {		
+					user += wordToFind.charAt(i);
+					System.out.println("kkkkkkk");
+				}else {					
+					//if i don't have this letter don't do anything
+					user += "*";
+					System.out.println("vvvvvv");
+				}	
+				if(wordToFind.equals(user)) {
+				count++;
+				hangmanImage();
 			}
+			if(guess.equals(wordFound)) {
+				winnerWords();
+			}//hideword------word klakl	wordToFind längde
 		}
 	}
 
