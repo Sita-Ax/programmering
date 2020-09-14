@@ -21,10 +21,6 @@ public class parseUp<E> {
 
 	public static String COMMA_DELIMITER = ",";
 	static int count = 0;
-	static int nameCount = 0;
-	static int timeCount = 0;
-	static String stamp = "";
-	public static String content = "";
 
 	public static void main(String[] args) {
 
@@ -40,7 +36,6 @@ public class parseUp<E> {
 		List<String> nameA = new ArrayList<String>();
 		for (int i = 0; i < records.size(); i++) {
 			List<String> localValues = records.get(i);
-
 			if (localValues.get(1).toLowerCase().contains("a")) {
 				nameA.add(localValues.get(1));
 			}
@@ -49,27 +44,24 @@ public class parseUp<E> {
 			}
 		}
 		for (String b : nameA) {
-
 		}
 		System.out.println(nameA.size() + " names contain both a and A");
 
 		List<Integer> timeS = new ArrayList<>();
-
 		for (int i = 0; i < records.size(); i++) {
 			List<String> localV = records.get(i);
-
 			for (List<String> line : records) {
-
 				if ((!line.equals(localV)) && (line.get(0).equals(localV.get(0)))) {
-					
-					System.out.println(i);
 					timeS.add(i);
 				}
 			}
-		}System.out.println("This TimeStamp is the same! ");
-		for (Integer i: timeS)
-			System.out.println(records.get(i));
-
+		}
+		System.out.println("These names have the same TimeStamp! ");
+		for (Integer i : timeS) {
+			System.out.print(records.get(i).get(1));
+			System.out.print(" and ");
+			System.out.println(records.get(i).get(2));
+		}
 		System.out.println("It is " + count + " that works whit Android App.");
 	}
 
@@ -78,7 +70,7 @@ public class parseUp<E> {
 		try (Scanner rowScanner = new Scanner(line)) { // för varje rad ny scan.
 			rowScanner.useDelimiter(COMMA_DELIMITER);// packar upp radern här kan vi använda spliten sparar från listan
 			while (rowScanner.hasNext()) { // varje rad en i taget efter 3.dj ggn rad 3 så länge den har någon här efter
-				values.add(rowScanner.next());// h'r är man inne i varje cell
+				values.add(rowScanner.next());// här är man inne i varje cell
 			}
 			if (values.get(6).contains("Android App")) {
 				count++;
