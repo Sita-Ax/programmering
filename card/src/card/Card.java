@@ -2,8 +2,10 @@ package card;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.image.BufferedImage;
 
 import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 //The object of Label class is a component for placing text in a container. 
 //It is used to display a single line of read only text. The text can be changed by 
@@ -23,13 +25,15 @@ public class Card extends JLabel implements MouseListener {
 	// half the dimensions of the back face icon
 	int iconWidhHalf, iconHeightHalf;
 	boolean mousePressedOn = false;
-	public cardController controller;
+	private Object controller;
+//	public cardController controller;
 
-	public Card(cardController controller, Icon face, Icon back, int number) {
+	//constructur for the card class
+	public Card(Icon face, Icon back, int number, BufferedImage card) {
 
 		// beginns whith faceDown
 		super(back);
-		//
+//		//
 		this.faceIcon = face;
 		this.backIcon = back;
 		this.number = number;
@@ -40,6 +44,10 @@ public class Card extends JLabel implements MouseListener {
 		this.iconWidhHalf = faceIconWidth() / 2;
 		this.iconHeightHalf = backIconHeight() / 2;
 //		this.controller = controller;
+	}
+	//this is for randomCardArray(cardToAdd) to crate an randomArray
+	public Card(ImageIcon imageIcon, ImageIcon backIcon2, int number2) {
+		
 	}
 
 	private int faceIconWidth() {
@@ -56,10 +64,11 @@ public class Card extends JLabel implements MouseListener {
 	}
 
 	// check if the coordinates are over the icon return true if it´s over icon
-	// othewise false
+	// othewise false and calls mouseClicked and mousePressed
 	private boolean overIcon(int x, int y) {
 		// calc the distance frome the center of the label
 		int distX = Math.abs(x - (this.getWidth() / 2));
+		System.out.println("overIcon");
 		int distY = Math.abs(y - (this.getHeight() / 2));
 		// outside icon region
 		if (distX > this.iconHeightHalf || distY > this.iconWidhHalf)
@@ -68,23 +77,24 @@ public class Card extends JLabel implements MouseListener {
 		return true;
 	}
 
+	//this turn up the card from mussedClicked on
 	public void turnUp() {
 
-//?????		Game.println("Card[" + number + "].turnUp()");
 		if (this.faceUp)
 			return;
 		// the card is faceUp
 		this.faceUp = true;
 		// asked if the card could turn up
-		this.faceUp = this.controller.turnUp(this);
+		this.faceUp = ((cardController) this.controller).turnUp(this);
 		// change image when the card is allow to turn
-		if (this.faceUp)
+		if (this.faceUp);
 			this.setIcon(this.faceIcon);
+		System.out.println("turnUp");
 	}
 
+//this is called from cardController
 	public void turnDown() {
 
-//???		Game.println("Card[" makeCard + number + "].turnDown()");
 		// the card is faceDown
 		if (!this.faceUp)
 			return;
@@ -92,6 +102,7 @@ public class Card extends JLabel implements MouseListener {
 		this.setIcon(this.backIcon);
 		// card is down
 		this.faceUp = false;
+		System.out.println("turndown");
 	}
 
 	// Invoked when the mouse button has been clicked (pressed and released)try to
