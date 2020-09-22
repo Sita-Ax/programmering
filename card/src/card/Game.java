@@ -21,7 +21,7 @@ import javax.swing.JPanel;
 public class Game implements ActionListener  {
 
 	// the frame is the window
-	private Window window;
+	private JFrame window;
 	private JFrame mainFrame;
 	private Container mainContentPane;
 	// 0-6 front side and 7 backside
@@ -63,8 +63,9 @@ public class Game implements ActionListener  {
 //		// load the cards
 		this.cardIcon = loadCardIcon();
 
-		JInternalFrame window = new JInternalFrame("Image");
-		mainFrame.add(window);
+//		JInternalFrame window = new JInternalFrame("Image");
+		window = new JFrame("Image");
+//		mainFrame.add(window);
 		window.setSize(700, 700);
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
@@ -201,7 +202,7 @@ public class Game implements ActionListener  {
 		if (e.getActionCommand().equals("New Game! "))
 			if(e.getActionCommand()== "New Game! ") {
 //				mainFrame.getContentPane().removeAll();
-				window = new Window(this.mainFrame);
+//				window = new Window(this.mainFrame);
 ////				dispose();
 			}
 			newGame();
