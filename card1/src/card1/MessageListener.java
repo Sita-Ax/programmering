@@ -1,50 +1,80 @@
 package card1;
 
-import java.awt.GridLayout;
+import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import javax.imageio.ImageIO;
-import javax.swing.Icon;
-import javax.swing.JFrame;
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
-
 
 public class MessageListener implements ActionListener {
-	
+
 	private JLabel img;
+	private BufferedImage image;
 
-	public MessageListener(JLabel img) throws IOException {
-		JLabel theImage = new JLabel();
+	public MessageListener(JLabel img, BufferedImage image) {
 		this.img = img;
-		JFrame window = new JFrame();
-		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		BufferedImage image = ImageIO.read(new File("6.jpg"));
-		JPanel panel = new JPanel(new GridLayout(1, 0));
-//		panel.add(new JLabel(new ImageIcon(colored(image, new Color(0, 240, 0, 32)))));
-		window.getContentPane().add(panel);
-		window.pack();
-		window.setVisible(true);
-		   }
+		this.image = image;
+	}
 
+	// this is ActionListener and it's a class that is responsible for handling all
+	// action events action listeners are used most for JButtons.
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		changeImage();
-	}
-
-	private void changeImage() {
-		BufferedImage image = null;
-		try {
-			// read the file and get it to image
-			image = ImageIO.read(new File("6.jpg"));
-			// if the file is not found throw an exception
-		} catch (IOException e) {
-			e.printStackTrace();
+		if (e.getActionCommand() == "black") {
+			updateImage();
 		}
-		img.setIcon((Icon) img);
+		if (e.getActionCommand() == "rotate") {
+			updateImageRotate();
+		}
+		if (e.getActionCommand() == "resize") {
+			updateImageResize();
+		}
 	}
 
+	// this methods updates the image and saved them to imageIcon
+	private void updateImage() {
+		img.setIcon(new ImageIcon(blackAndWhite()));
+	}
+
+	private void updateImageRotate() {
+		img.setIcon(new ImageIcon(rotate()));
+	}
+
+	private void updateImageResize() {
+		img.setIcon(new ImageIcon(resizeImage(image, 100, 100)));
+	}
+
+	// blackAndWhite is the method where Graphics2D is used to do the image black an
+	// white and image and return it as BufferedImage object.
+	BufferedImage blackAndWhite() {
+		BufferedImage blackImg = new BufferedImage(image.getWidth(), image.getHeight(), BufferedImage.TYPE_BYTE_BINARY);
+		Graphics2D graphics = blackImg.createGraphics();
+		graphics.drawImage(image, 0, 0, null);
+		return blackImg;
+	}
+
+	// rotate is the method where Graphics2D is used to rotate image and return it
+	// as BufferedImage object.
+	BufferedImage rotate() {
+		int w = image.getWidth();
+		int h = image.getHeight();
+		BufferedImage rotated = new BufferedImage(w, h, image.getType());
+		Graphics2D graphic = rotated.createGraphics();
+		// 45 is the rotated degrees and w/2,h/2 is the place of the image
+		graphic.rotate(Math.toRadians(45), w / 2, h / 2);
+		graphic.drawImage(image, null, 0, 0);
+		graphic.dispose();
+		return rotated;
+	}
+
+	// resizeImage is the method where Graphics2D is used to resize image and return
+	// it as BufferedImage object.
+	BufferedImage resizeImage(BufferedImage originalImage, int targetWidth, int targetHeight) {
+		BufferedImage resizedImage = new BufferedImage(targetWidth, targetHeight, BufferedImage.TYPE_INT_RGB);
+		Graphics2D graphics2D = resizedImage.createGraphics();
+		graphics2D.drawImage(originalImage, 0, 0, targetWidth, targetHeight, null);
+		graphics2D.dispose();
+		return resizedImage;
+	}
 }
