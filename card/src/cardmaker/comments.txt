@@ -1,0 +1,6 @@
+//The object of Label class is a component for placing text in a container. 
+//It is used to display a single line of read only text. The text can be changed by 
+//an application but a user cannot edit it directly.
+
+//The Java MouseListener is notified whenever you change the state of mouse. 
+//It is notified against MouseEvent. The MouseListener interface is found in java. awt. event package.

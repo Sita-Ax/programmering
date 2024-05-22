@@ -1,0 +1,40 @@
+//	private static BufferedImage colored(BufferedImage image, Color color) {
+//	int w = image.getWidth();
+//	int h = image.getHeight();
+//	BufferedImage colored = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
+//	Graphics2D g = colored.createGraphics();
+//	g.drawImage(image, 0, 0, null);
+//	g.setComposite(AlphaComposite.SrcAtop);
+//	g.setColor(color);
+//	g.fillRect(0, 0, w, h);
+//	g.dispose();
+//	return colored;
+//}
+
+//Tutorial
+// Image img = Toolkit.getDefaultToolkit().getImage("6.jpg");
+button.addActionListener(new ActionListener() {
+		// 	public void actionPerformed(ActionEvent ae) {
+		// 		rotatePanel.rotate();
+		// 	}
+		// });
+
+    // public void imageMain(Image image) {
+	// 	this.image = image;
+	// 	MediaTracker mt = new MediaTracker(this);
+	// 	mt.addImage(image, 0);
+	// 	try {
+	// 		mt.waitForID(0);
+	// 	} catch (Exception e) {
+	// 		e.printStackTrace();
+	// 	}
+	// }
+
+    public void rotate() {
+	// 	// rotate 5 degrees at a time
+	// 	double currentImage = 45.0;
+	// 	if (currentImage >= 360.0) {
+	// 		currentImage = 0;
+	// 	}
+	// 	repaint();
+	// }

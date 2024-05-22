@@ -13,6 +13,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.WindowConstants;
 
 //build interface and get the method run 
 public class UserInterFace implements Runnable {
@@ -21,6 +22,7 @@ public class UserInterFace implements Runnable {
 	private Container mainContentPane;
 
 	public UserInterFace() {
+		// empty constructur for now every init is inside run
 	}
 
 	// this start is a override loop a interface of the frame
@@ -29,7 +31,7 @@ public class UserInterFace implements Runnable {
 		// this is the whole frame is created and this is Image
 		this.mainFrame = new JFrame("Image");
 		// the exit button in the right corner in the frame
-		this.mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.mainFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		// this is the size on the frame
 		this.mainFrame.setPreferredSize(new Dimension(1000, 500));
 		// the content say what you can do in the program and that is on the frame
@@ -50,7 +52,7 @@ public class UserInterFace implements Runnable {
 		BufferedImage image = null;
 		try {
 			// read the file and get it to image
-			image = ImageIO.read(new File("1.jpg"));
+			image = ImageIO.read(new File("./card1/1.jpg"));
 			// if the file is not found throw an exception
 		} catch (IOException e) {
 			e.printStackTrace();

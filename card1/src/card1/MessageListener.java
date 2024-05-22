@@ -19,15 +19,17 @@ public class MessageListener implements ActionListener {
 
 	// this is ActionListener and it's a class that is responsible for handling all
 	// action events action listeners are used most for JButtons.
+	// I change from e.getActionCommand() == "black" to this because the
+	// SonarLint-varning
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if (e.getActionCommand() == "black") {
+		if ("black".equals(e.getActionCommand())) {
 			updateImage();
 		}
-		if (e.getActionCommand() == "rotate") {
+		if ("rotate".equals(e.getActionCommand())) {
 			updateImageRotate();
 		}
-		if (e.getActionCommand() == "resize") {
+		if ("resize".equals(e.getActionCommand())) {
 			updateImageResize();
 		}
 	}
@@ -62,7 +64,7 @@ public class MessageListener implements ActionListener {
 		BufferedImage rotated = new BufferedImage(w, h, image.getType());
 		Graphics2D graphic = rotated.createGraphics();
 		// 45 is the rotated degrees and w/2,h/2 is the place of the image
-		graphic.rotate(Math.toRadians(45), w / 2, h / 2);
+		graphic.rotate(Math.toRadians(45), (double) w / 2, (double) h / 2);
 		graphic.drawImage(image, null, 0, 0);
 		graphic.dispose();
 		return rotated;

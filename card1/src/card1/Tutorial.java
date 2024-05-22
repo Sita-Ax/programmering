@@ -21,50 +21,40 @@ public class Tutorial extends JPanel {
 	private Image image;
 	private double currentImage;
 
-//this is the frame that creates image inside
+	// this is the frame that creates image inside
 	public Tutorial(Image testImage) {
-	
+
 		JFrame frame = new JFrame();
 		Container c = frame.getContentPane();
 		c.setLayout(new BorderLayout());
-		Image img = Toolkit.getDefaultToolkit().getImage("6.jpg");
 		final Tutorial rotatePanel = new Tutorial(testImage);
 		JButton button = new JButton("Rotate");
-		button.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent ae) {
-				rotatePanel.rotate();
-			}
-		});
+		button.addActionListener(e -> rotatePanel.rotate());
 		c.add(rotatePanel, BorderLayout.CENTER);
 		c.add(button, BorderLayout.SOUTH);
 		frame.pack();
 		frame.setVisible(true);
 	}
 
-	public void ImageMain(Image image) {
+	public void imageMain(Image image) {
 		this.image = image;
 		MediaTracker mt = new MediaTracker(this);
 		mt.addImage(image, 0);
 		try {
 			mt.waitForID(0);
 		} catch (Exception e) {
+			Thread.currentThread().interrupt();
 			e.printStackTrace();
 		}
 	}
 
 	public void rotate() {
-		// rotate 5 degrees at a time
-		double currentImage = 45.0;
-		if (currentImage >= 360.0) {
-			currentImage = 0;
-		}
 		repaint();
 	}
-//here we can draw the image
 
+	// here we can draw the image
+	@Override
 	public void paintComponent(Graphics g) {
-
-
 		super.paintComponent(g);
 		Graphics2D g2d = (Graphics2D) g;
 		AffineTransform origXform = g2d.getTransform();
@@ -81,6 +71,7 @@ public class Tutorial extends JPanel {
 		g2d.setTransform(origXform);
 	}
 
+	@Override
 	public Dimension getPreferredSize() {
 		return new Dimension(image.getWidth(this), image.getHeight(this));
 	}

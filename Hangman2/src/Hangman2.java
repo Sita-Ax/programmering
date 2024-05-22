@@ -3,7 +3,7 @@
 import java.util.Scanner;
 
 public class Hangman2 {
-	// it´s mean that you have 7 guesses.
+	// itï¿½s mean that you have 7 guesses.
 	public static int maxCount = 7;
 	public static int count = 0;
 	public static int wrongGuess = 0;
@@ -127,7 +127,7 @@ public class Hangman2 {
 		return true;
 	}
 
-	public static void enter(String tryletter) { 			// metod som gör uppdatering efter en hittade bokstav
+	public static void enter(String tryletter) { 			// metod som gï¿½r uppdatering efter en hittade bokstav
 		 //not numbers
 		 checkingChar(tryletter);	
 		// does the word have this letter
