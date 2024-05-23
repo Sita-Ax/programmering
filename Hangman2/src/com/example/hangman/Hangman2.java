@@ -16,9 +16,9 @@ public class Hangman2 {
 	// Your guesses
 	private static String tryLetter = "You have: ";
 	private static final Logger logger = Logger.getLogger(Hangman2.class.getName());
+	private static final String MENU_PROMPT = "\nChoose GL to play and found the letters\nChoose GW to play and found the Word\nChoose GS to see the gamestatus\nChoose EXIT to exit the game.";
 
 	public static void main(String[] args) {
-
 		wordToFind = Hang.getWord();
 		welcomeWords();
 		menu();
@@ -26,10 +26,7 @@ public class Hangman2 {
 
 	public static void menu() {
 
-		logger.info("Choose GL to play and found the letters");
-		logger.info("Choose GW to play and found the Word");
-		logger.info("Choose GS to see the gamestatus");
-		logger.info("Choose EXIT to exit the game.");
+		logger.info(MENU_PROMPT);
 		Scanner input = new Scanner(System.in);
 		String str = input.next();
 
