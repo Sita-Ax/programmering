@@ -1,6 +1,7 @@
 package com.example.hangman;
 
 import java.util.Scanner;
+import java.util.logging.Logger;
 
 public class Hangman2 {
 	// This mean that you have 7 guesses.
@@ -14,6 +15,7 @@ public class Hangman2 {
 	private static char[] wordFound;
 	// Your guesses
 	private static String tryLetter = "You have: ";
+	private static final Logger logger = Logger.getLogger(Hangman2.class.getName());
 
 	public static void main(String[] args) {
 
@@ -24,10 +26,10 @@ public class Hangman2 {
 
 	public static void menu() {
 
-		System.out.println("Choose GL to play and found the letters");
-		System.out.println("Choose GW to play and found the Word");
-		System.out.println("Choose GS to see the gamestatus");
-		System.out.println("Choose EXIT to exit the game.");
+		logger.info("Choose GL to play and found the letters");
+		logger.info("Choose GW to play and found the Word");
+		logger.info("Choose GS to see the gamestatus");
+		logger.info("Choose EXIT to exit the game.");
 		Scanner input = new Scanner(System.in);
 		String str = input.next();
 
@@ -213,89 +215,119 @@ public class Hangman2 {
 	}
 
 	public static void hangmanImage() {
-
 		if (wrongGuess == 1) {
-			System.out.println("Wrong guess, try again");
-			System.out.println();
-			System.out.println();
-			System.out.println();
-			System.out.println();
-			System.out.println("___|___");
-			System.out.println();
+			logger.info("Wrong guess, try again\n\n\n\n___|___\n");
 		}
 		if (wrongGuess == 2) {
-			System.out.println("Wrong guess, try again");
-			System.out.println("   |");
-			System.out.println("   |");
-			System.out.println("   |");
-			System.out.println("   |");
-			System.out.println("   |");
-			System.out.println("   |");
-			System.out.println("   |");
-			System.out.println("___|___");
+			logger.info("Wrong guess, try again\n   |\n   |\n   |\n   |\n   |\n   |\n   |\n___|___\n");
 		}
 		if (wrongGuess == 3) {
-			System.out.println("Wrong guess, try again");
-			System.out.println("   ____________");
-			System.out.println("   |");
-			System.out.println("   |");
-			System.out.println("   |");
-			System.out.println("   |");
-			System.out.println("   |");
-			System.out.println("   |");
-			System.out.println("   | ");
-			System.out.println("___|___");
+			logger.info(
+					"Wrong guess, try again\n   ____________\n   |\n   |\n   |\n   |\n   |\n   |\n   | \n___|___\n");
 		}
 		if (wrongGuess == 4) {
-			System.out.println("Wrong guess, try again");
-			System.out.println("   ____________");
-			System.out.println("   |          _|_");
-			System.out.println("   |         /   \\");
-			System.out.println("   |        |     |");
-			System.out.println("   |         \\_ _/");
-			System.out.println("   |");
-			System.out.println("   |");
-			System.out.println("   |");
-			System.out.println("___|___");
+			logger.info(
+					"Wrong guess, try again\n   ____________\n   |          _|_\n   |         /   \\\n   |        |     |\n   |         \\_ _/\n   |\n   |\n   |\n___|___\n");
 		}
 		if (wrongGuess == 5) {
-			System.out.println("Wrong guess, try again");
-			System.out.println("   ____________");
-			System.out.println("   |          _|_");
-			System.out.println("   |         /   \\");
-			System.out.println("   |        |     |");
-			System.out.println("   |         \\_ _/");
-			System.out.println("   |           |");
-			System.out.println("   |           |");
-			System.out.println("   |");
-			System.out.println("___|___");
+			logger.info(
+					"Wrong guess, try again\n   ____________\n   |          _|_\n   |         /   \\\n   |        |     |\n   |         \\_ _/\n   |           |\n   |           |\n   |\n___|___\n");
 		}
 		if (wrongGuess == 6) {
-			System.out.println("Wrong guess, try again");
-			System.out.println("   ____________");
-			System.out.println("   |          _|_");
-			System.out.println("   |         /   \\");
-			System.out.println("   |        |     |");
-			System.out.println("   |         \\_ _/");
-			System.out.println("   |           |");
-			System.out.println("   |           |");
-			System.out.println("   |          / \\ ");
-			System.out.println("___|___      /   \\");
+			logger.info(
+					"Wrong guess, try again\n   ____________\n   |          _|_\n   |         /   \\\n   |        |     |\n   |         \\_ _/\n   |           |\n   |           |\n   |          / \\ \n___|___      /   \\\n");
 		}
 		if (wrongGuess == 7) {
-			System.out.println("GAME OVER!");
-			System.out.println("   ____________");
-			System.out.println("   |          _|_");
-			System.out.println("   |         /   \\");
-			System.out.println("   |        |     |");
-			System.out.println("   |         \\_ _/");
-			System.out.println("   |          _|_");
-			System.out.println("   |         / | \\");
-			System.out.println("   |          / \\ ");
-			System.out.println("___|___      /   \\");
-			System.out.println("GAME OVER! The word was " + wordToFind);
+			logger.info(
+					"GAME OVER!\n   ____________\n   |          _|_\n   |         /   \\\n   |        |     |\n   |         \\_ _/\n   |          _|_\n   |         / | \\\n   |          / \\ \n___|___      /   \\\nGAME OVER! The word was  "
+							+ wordToFind);
 		}
 	}
+
+	// public static void hangmanImage() {
+
+	// if (wrongGuess == 1) {
+	// System.out.println("Wrong guess, try again");
+	// System.out.println();
+	// System.out.println();
+	// System.out.println();
+	// System.out.println();
+	// System.out.println("___|___");
+	// System.out.println();
+	// }
+	// if (wrongGuess == 2) {
+	// System.out.println("Wrong guess, try again");
+	// System.out.println(" |");
+	// System.out.println(" |");
+	// System.out.println(" |");
+	// System.out.println(" |");
+	// System.out.println(" |");
+	// System.out.println(" |");
+	// System.out.println(" |");
+	// System.out.println("___|___");
+	// }
+	// if (wrongGuess == 3) {
+	// System.out.println("Wrong guess, try again");
+	// System.out.println(" ____________");
+	// System.out.println(" |");
+	// System.out.println(" |");
+	// System.out.println(" |");
+	// System.out.println(" |");
+	// System.out.println(" |");
+	// System.out.println(" |");
+	// System.out.println(" | ");
+	// System.out.println("___|___");
+	// }
+	// if (wrongGuess == 4) {
+	// System.out.println("Wrong guess, try again");
+	// System.out.println(" ____________");
+	// System.out.println(" | _|_");
+	// System.out.println(" | / \\");
+	// System.out.println(" | | |");
+	// System.out.println(" | \\_ _/");
+	// System.out.println(" |");
+	// System.out.println(" |");
+	// System.out.println(" |");
+	// System.out.println("___|___");
+	// }
+	// if (wrongGuess == 5) {
+	// System.out.println("Wrong guess, try again");
+	// System.out.println(" ____________");
+	// System.out.println(" | _|_");
+	// System.out.println(" | / \\");
+	// System.out.println(" | | |");
+	// System.out.println(" | \\_ _/");
+	// System.out.println(" | |");
+	// System.out.println(" | |");
+	// System.out.println(" |");
+	// System.out.println("___|___");
+	// }
+	// if (wrongGuess == 6) {
+	// System.out.println("Wrong guess, try again");
+	// System.out.println(" ____________");
+	// System.out.println(" | _|_");
+	// System.out.println(" | / \\");
+	// System.out.println(" | | |");
+	// System.out.println(" | \\_ _/");
+	// System.out.println(" | |");
+	// System.out.println(" | |");
+	// System.out.println(" | / \\ ");
+	// System.out.println("___|___ / \\");
+	// }
+	// if (wrongGuess == 7) {
+	// System.out.println("GAME OVER!");
+	// System.out.println(" ____________");
+	// System.out.println(" | _|_");
+	// System.out.println(" | / \\");
+	// System.out.println(" | | |");
+	// System.out.println(" | \\_ _/");
+	// System.out.println(" | _|_");
+	// System.out.println(" | / | \\");
+	// System.out.println(" | / \\ ");
+	// System.out.println("___|___ / \\");
+	// System.out.println("GAME OVER! The word was " + wordToFind);
+	// }
+	// }
 
 	// Getters and Setters
 	public static int getCount() {
